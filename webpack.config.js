@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const precss = require('precss');
 
 module.exports = {
   devtool: 'eval',
@@ -17,10 +19,28 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
-      include: path.join(__dirname, 'src')
-    }]
-  }
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: ['react-hot', 'babel'],
+        include: path.join(__dirname, 'src')
+      },
+      {
+        test: /\.scss$/,
+        loaders: [
+          'style-loader',
+          'css-loader',
+          'postcss',
+          'sass-loader',
+        ],
+        include: [
+          path.join(__dirname, 'src'),
+          path.join(__dirname, 'src'),
+        ],
+      }
+  ]
+},
+postcss() {
+  return [autoprefixer, precss];
+}
 };

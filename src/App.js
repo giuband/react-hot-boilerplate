@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+require('./style.scss');
 
-export default class App extends Component {
+export class App extends Component {
   render() {
     return (
       <h1>Hello, world.</h1>
